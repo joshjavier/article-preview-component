@@ -21,6 +21,11 @@
   --desaturated-dark-blue: 214 17% 51%;
   --grayish-blue: 212 23% 69%;
   --light-grayish-blue: 210 46% 95%;
+  --shadow-color: 211deg 15% 90%;
+  --shadow-elevation-medium: 0px 1px 1.1px hsl(var(--shadow-color) / 0.36),
+    0px 3.3px 3.7px -0.8px hsl(var(--shadow-color) / 0.36),
+    0px 8.2px 9.2px -1.7px hsl(var(--shadow-color) / 0.36),
+    0.1px 20px 22.5px -2.5px hsl(var(--shadow-color) / 0.36);
 }
 
 * {
@@ -61,6 +66,7 @@ body {
   overflow: hidden;
   position: relative;
   letter-spacing: 0.16px;
+  box-shadow: var(--shadow-elevation-medium);
 }
 .article-preview .image {
   --n: 327;
@@ -187,6 +193,9 @@ button > svg {
   .article-preview .image {
     --n: 285;
     --d: 280;
+  }
+  .article-preview .image img {
+    object-position: 0% 30%;
   }
   .article-preview .content {
     padding: calc(32 / 16 * 1rem) calc(40 / 16 * 1rem);
