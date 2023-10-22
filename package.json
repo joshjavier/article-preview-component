@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "rollup --config",
-    "dev": "wds --node-resolve --open --watch",
+    "dev": "wds --node-resolve --open --watch --root-dir src",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

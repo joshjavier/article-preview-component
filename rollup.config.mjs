@@ -4,7 +4,7 @@ import terser from '@rollup/plugin-terser';
 import { copy } from '@web/rollup-plugin-copy';
 
 export default {
-  input: 'index.html',
+  input: 'src/index.html',
   output: { dir: 'dist' },
   plugins: [html(), nodeResolve(), copy({ patterns: 'fonts' }), terser()],
 };
