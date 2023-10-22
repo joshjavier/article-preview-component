@@ -4,6 +4,7 @@
   "description": "![Design preview for the Article preview component coding challenge](./design/desktop-preview.jpg)",
   "main": "index.js",
   "scripts": {
+    "build": "rollup --config",
     "dev": "wds --node-resolve --open --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,8 +12,13 @@
   "author": "Josh Javier",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@web/dev-server": "^0.3.6",
-    "prettier": "3.0.3"
+    "@web/rollup-plugin-copy": "^0.4.1",
+    "@web/rollup-plugin-html": "^2.0.1",
+    "prettier": "3.0.3",
+    "rollup": "^4.1.4"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.5.3"
