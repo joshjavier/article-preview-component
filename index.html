@@ -5,34 +5,7 @@
     <title>Frontend Mentor | Article preview component</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <style>
-      .attribution {
-        font-size: 11px;
-        text-align: center;
-      }
-      .attribution a {
-        color: hsl(228, 45%, 44%);
-      }
-
-      share-links svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      /* Utilities */
-      .visually-hidden:not(:focus):not(:active) {
-        border: 0;
-        clip: rect(0 0 0 0);
-        clip-path: inset(50%);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        white-space: nowrap;
-        width: 1px;
-      }
-    </style>
+    <link rel="stylesheet" href="./css/main.css" />
 
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
 
@@ -64,11 +37,17 @@
           d="M10 0C4.478 0 0 4.477 0 10c0 4.237 2.636 7.855 6.356 9.312-.088-.791-.167-2.005.035-2.868.182-.78 1.172-4.97 1.172-4.97s-.299-.6-.299-1.486c0-1.39.806-2.428 1.81-2.428.852 0 1.264.64 1.264 1.408 0 .858-.545 2.14-.828 3.33-.236.995.5 1.807 1.48 1.807 1.778 0 3.144-1.874 3.144-4.58 0-2.393-1.72-4.068-4.177-4.068-2.845 0-4.515 2.135-4.515 4.34 0 .859.331 1.781.745 2.281a.3.3 0 01.069.288l-.278 1.133c-.044.183-.145.223-.335.134-1.249-.581-2.03-2.407-2.03-3.874 0-3.154 2.292-6.052 6.608-6.052 3.469 0 6.165 2.473 6.165 5.776 0 3.447-2.173 6.22-5.19 6.22-1.013 0-1.965-.525-2.291-1.148l-.623 2.378c-.226.869-.835 1.958-1.244 2.621.937.29 1.931.446 2.962.446 5.522 0 10-4.477 10-10S15.522 0 10 0z"
         />
       </symbol>
+      <symbol id="icon-share" viewBox="0 0 15 13">
+        <path
+          fill="currentColor"
+          d="M15 6.495L8.766.014V3.88H7.441C3.33 3.88 0 7.039 0 10.936v2.049l.589-.612C2.59 10.294 5.422 9.11 8.39 9.11h.375v3.867L15 6.495z"
+        />
+      </symbol>
     </svg>
 
     <main>
-      <article>
-        <div class="image"></div>
+      <article class="article-preview">
+        <div class="image frame"><img src="./images/drawers.jpg" alt="" width="660" height="528" /></div>
         <div class="content">
           <h2 class="title">
             Shift the overall look and feel by adding these wonderful touches to furniture in your home
@@ -78,27 +57,33 @@
             got some simple tips to help you make any room feel complete.
           </p>
           <footer>
-            <img src="" alt="" />
-            <address><a href="#" rel="author">Michelle Appleton</a></address>
-            <time datetime="2020-06-28">28 Jun 2020</time>
+            <img class="avatar" src="./images/avatar-michelle.jpg" alt="" width="175" height="175" />
+            <div>
+              <address><a href="#" rel="author">Michelle Appleton</a></address>
+              <time datetime="2020-06-28">28 Jun 2020</time>
+            </div>
+            <button class="share-btn" aria-pressed="false">
+              <svg viewBox="0 0 15 13" width="15" height="13"><use href="#icon-share" /></svg>
+              <span class="visually-hidden">Show social media links</span>
+            </button>
             <share-links>
               <span>Share</span>
               <ul>
                 <li>
                   <a href="#">
-                    <svg><use href="#icon-facebook" /></svg>
+                    <svg viewBox="0 0 20 20"><use href="#icon-facebook" /></svg>
                     <span class="visually-hidden">Share on Facebook</span>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <svg><use href="#icon-twitter" /></svg>
+                    <svg viewBox="0 0 20 17"><use href="#icon-twitter" /></svg>
                     <span class="visually-hidden">Share on Twitter</span>
                   </a>
                 </li>
                 <li>
                   <a href="#">
-                    <svg><use href="#icon-pinterest" /></svg>
+                    <svg viewBox="0 0 20 20"><use href="#icon-pinterest" /></svg>
                     <span class="visually-hidden">Share on Pinterest</span>
                   </a>
                 </li>
@@ -109,10 +94,54 @@
       </article>
     </main>
 
-    <footer class="attribution">
+    <footer class="attribution" hidden>
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge" rel="external" target="_blank">Frontend Mentor</a>. Coded by
       <a href="https://joshjavier.com/" rel="external author">Josh Javier</a>.
     </footer>
+
+    <script>
+      const shareBtn = document.querySelector('.share-btn');
+      const focusableShareLinks = document.querySelectorAll('share-links a');
+      const firstShareLink = focusableShareLinks[0];
+      const lastShareLink = focusableShareLinks[focusableShareLinks.length - 1];
+
+      shareBtn.addEventListener('click', (event) => {
+        const ariaPressed = event.target.getAttribute('aria-pressed');
+        const isPressed = ariaPressed === 'true';
+        if (isPressed) {
+          event.target.setAttribute('aria-pressed', 'false');
+          event.target.focus();
+        } else {
+          event.target.setAttribute('aria-pressed', 'true');
+          firstShareLink.focus();
+        }
+      });
+
+      // Focus management
+      lastShareLink.addEventListener('keydown', (event) => {
+        if (event.key === 'Tab' && !event.shiftKey) {
+          event.preventDefault();
+          shareBtn.focus();
+        }
+      });
+
+      shareBtn.addEventListener('keydown', (event) => {
+        const ariaPressed = event.target.getAttribute('aria-pressed');
+        const isPressed = ariaPressed === 'true';
+
+        if (!isPressed) return;
+
+        if (event.key === 'Tab' && event.shiftKey) {
+          event.preventDefault();
+          lastShareLink.focus();
+        }
+
+        if (event.key === 'Tab' && !event.shiftKey) {
+          event.preventDefault();
+          firstShareLink.focus();
+        }
+      });
+    </script>
   </body>
 </html>
