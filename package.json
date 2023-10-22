@@ -4,12 +4,17 @@
   "description": "![Design preview for the Article preview component coding challenge](./design/desktop-preview.jpg)",
   "main": "index.js",
   "scripts": {
+    "dev": "wds --node-resolve --open --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Josh Javier",
   "license": "MIT",
   "devDependencies": {
+    "@web/dev-server": "^0.3.6",
     "prettier": "3.0.3"
+  },
+  "dependencies": {
+    "@floating-ui/dom": "^1.5.3"
   }
 }

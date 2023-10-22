@@ -9,13 +9,7 @@
 
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
 
-    <script>
-      class ShareLinks extends HTMLElement {}
-
-      if (!customElements.get('share-links')) {
-        customElements.define('share-links', ShareLinks);
-      }
-    </script>
+    <script type="module" src="./share-links.js"></script>
   </head>
   <body>
     <svg style="display: none">
@@ -62,32 +56,35 @@
               <address><a href="#" rel="author">Michelle Appleton</a></address>
               <time datetime="2020-06-28">28 Jun 2020</time>
             </div>
-            <button class="share-btn" aria-pressed="false">
-              <svg viewBox="0 0 15 13" width="15" height="13"><use href="#icon-share" /></svg>
-              <span class="visually-hidden">Show social media links</span>
-            </button>
             <share-links>
-              <span>Share</span>
-              <ul>
-                <li>
-                  <a href="#">
-                    <svg viewBox="0 0 20 20"><use href="#icon-facebook" /></svg>
-                    <span class="visually-hidden">Share on Facebook</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg viewBox="0 0 20 17"><use href="#icon-twitter" /></svg>
-                    <span class="visually-hidden">Share on Twitter</span>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <svg viewBox="0 0 20 20"><use href="#icon-pinterest" /></svg>
-                    <span class="visually-hidden">Share on Pinterest</span>
-                  </a>
-                </li>
-              </ul>
+              <button class="share-btn" aria-pressed="false">
+                <svg viewBox="0 0 15 13" width="15" height="13"><use href="#icon-share" /></svg>
+                <span class="visually-hidden">Show social media links</span>
+              </button>
+              <div class="share-panel">
+                <span>Share</span>
+                <ul>
+                  <li>
+                    <a href="#">
+                      <svg viewBox="0 0 20 20"><use href="#icon-facebook" /></svg>
+                      <span class="visually-hidden">Share on Facebook</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <svg viewBox="0 0 20 17"><use href="#icon-twitter" /></svg>
+                      <span class="visually-hidden">Share on Twitter</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <svg viewBox="0 0 20 20"><use href="#icon-pinterest" /></svg>
+                      <span class="visually-hidden">Share on Pinterest</span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="arrow"></div>
+              </div>
             </share-links>
           </footer>
         </div>
@@ -99,49 +96,5 @@
       <a href="https://www.frontendmentor.io?ref=challenge" rel="external" target="_blank">Frontend Mentor</a>. Coded by
       <a href="https://joshjavier.com/" rel="external author">Josh Javier</a>.
     </footer>
-
-    <script>
-      const shareBtn = document.querySelector('.share-btn');
-      const focusableShareLinks = document.querySelectorAll('share-links a');
-      const firstShareLink = focusableShareLinks[0];
-      const lastShareLink = focusableShareLinks[focusableShareLinks.length - 1];
-
-      shareBtn.addEventListener('click', (event) => {
-        const ariaPressed = event.target.getAttribute('aria-pressed');
-        const isPressed = ariaPressed === 'true';
-        if (isPressed) {
-          event.target.setAttribute('aria-pressed', 'false');
-          event.target.focus();
-        } else {
-          event.target.setAttribute('aria-pressed', 'true');
-          firstShareLink.focus();
-        }
-      });
-
-      // Focus management
-      lastShareLink.addEventListener('keydown', (event) => {
-        if (event.key === 'Tab' && !event.shiftKey) {
-          event.preventDefault();
-          shareBtn.focus();
-        }
-      });
-
-      shareBtn.addEventListener('keydown', (event) => {
-        const ariaPressed = event.target.getAttribute('aria-pressed');
-        const isPressed = ariaPressed === 'true';
-
-        if (!isPressed) return;
-
-        if (event.key === 'Tab' && event.shiftKey) {
-          event.preventDefault();
-          lastShareLink.focus();
-        }
-
-        if (event.key === 'Tab' && !event.shiftKey) {
-          event.preventDefault();
-          firstShareLink.focus();
-        }
-      });
-    </script>
   </body>
 </html>
