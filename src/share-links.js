@@ -96,7 +96,15 @@ class ShareLinks extends HTMLElement {
       this.shareBtn.focus();
     } else {
       this.shareBtn.setAttribute('aria-pressed', 'true');
-      this.firstShareLink.focus();
+      if (this.state.tooltip) {
+        this.sharePanel.classList.add('fade-in-bottom');
+        setTimeout(() => {
+          this.sharePanel.classList.remove('fade-in-bottom');
+          this.firstShareLink.focus();
+        }, 400);
+      } else {
+        this.firstShareLink.focus();
+      }
     }
   }
 
